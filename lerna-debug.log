@@ -1,0 +1,14 @@
+0 silly argv { _: [ 'bootstrap' ], lernaVersion: '4.0.0', '$0': 'lerna' }
+1 notice cli v4.0.0
+2 verbose rootPath /Users/bytedance/workSpace/sm-cli
+3 error JSONError: Unexpected token "}" (0x7D) in JSON at position 496 while parsing near "...8aa9ec1d0e2c86ce8\",\n}\n" in core/cli/package.json
+3 error
+3 error [0m [90m 24 |[39m   }[33m,[39m[0m
+3 error [0m [90m 25 |[39m   [32m"gitHead"[39m[33m:[39m [32m"e369f55239d6cda94b463948aa9ec1d0e2c86ce8"[39m[33m,[39m[0m
+3 error [0m[31m[1m>[22m[39m[90m 26 |[39m }[0m
+3 error [0m [90m    |[39m [31m[1m^[22m[39m[0m
+3 error [0m [90m 27 |[39m[0m
+3 error
+3 error     at parseJson (/Users/bytedance/workSpace/sm-cli/node_modules/parse-json/index.js:29:21)
+3 error     at parse (/Users/bytedance/workSpace/sm-cli/node_modules/load-json-file/index.js:15:9)
+3 error     at module.exports (/Users/bytedance/workSpace/sm-cli/node_modules/load-json-file/index.js:18:47)

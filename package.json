@@ -4,5 +4,9 @@
   "devDependencies": {
     "lerna": "^4.0.0"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "import-local": "^3.0.2",
+    "npmlog": "^4.1.2"
+  }
 }

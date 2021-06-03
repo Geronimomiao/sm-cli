@@ -1,11 +1,14 @@
 {
-  "name": "@sm-cli/init",
+  "name": "@sm-cli/core",
   "version": "0.0.6",
-  "description": "> TODO: description",
+  "description": "sm-cli core",
   "author": "miao.tjpu",
   "homepage": "",
   "license": "ISC",
   "main": "lib/index.js",
+  "bin": {
+    "sm-cli": "bin/index.js"
+  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
