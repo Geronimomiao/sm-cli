@@ -2,12 +2,10 @@
 const importLocal = require('import-local');
 const util = require('@sm-cli/utils');
 
-
+console.log(importLocal(__filename));
 if(importLocal(__filename)) {
-    require('npmlog').info('cli', '正在使用 sm-cli 线上版本')
+    require('npmlog').info('cli', '使用全局版本')
 } else {
-    console.log(__filename);
-    require('npmlog').info('cli', '正在使用 sm-cli 开发版本')
     require('../lib')(process.argv.slice(2));
     util()
 }
