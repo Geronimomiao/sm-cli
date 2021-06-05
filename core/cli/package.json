@@ -25,6 +25,7 @@
   "gitHead": "e369f55239d6cda94b463948aa9ec1d0e2c86ce8",
   "dependencies": {
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2"
+    "npmlog": "^4.1.2",
+    "@sm-cli/utils": "^0.0.8"
   }
 }
