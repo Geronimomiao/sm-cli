@@ -1,6 +1,6 @@
 {
   "name": "@sm-cli/core",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "sm-cli core",
   "author": "miao.tjpu",
   "homepage": "",
@@ -24,7 +24,7 @@
   },
   "gitHead": "e369f55239d6cda94b463948aa9ec1d0e2c86ce8",
   "dependencies": {
-    "@sm-cli/utils": "^0.0.9",
+    "@sm-cli/utils": "^0.0.10",
     "import-local": "^3.0.2",
     "npmlog": "^4.1.2"
   }
