@@ -24,8 +24,11 @@
   },
   "gitHead": "e369f55239d6cda94b463948aa9ec1d0e2c86ce8",
   "dependencies": {
+    "@sm-cli/log": "^0.0.10",
     "@sm-cli/utils": "^0.0.10",
+    "colors": "^1.4.0",
     "import-local": "^3.0.2",
-    "npmlog": "^4.1.2"
+    "npmlog": "^4.1.2",
+    "semver": "^7.3.5"
   }
 }
