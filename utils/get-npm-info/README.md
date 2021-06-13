@@ -1,11 +1,11 @@
-# `utils`
+# `get-npm-info`
 
 > TODO: description
 
 ## Usage
 
 ```
-const utils = require('utils');
+const getNpmInfo = require('get-npm-info');
 
 // TODO: DEMONSTRATE API
 ```

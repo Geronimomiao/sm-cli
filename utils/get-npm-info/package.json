@@ -1,0 +1,31 @@
+{
+  "name": "@sm-cli/get-npm-info",
+  "version": "0.0.10",
+  "description": "获取 npm 包版本信息",
+  "author": "wangsimiao <wangsimiao.tjpu@bytedance.com>",
+  "homepage": "https://github.com/Geronimomiao/sm-cli#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geronimomiao/sm-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/Geronimomiao/sm-cli/issues"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "semver": "^7.3.5",
+    "url-join": "^4.0.1"
+  }
+}
