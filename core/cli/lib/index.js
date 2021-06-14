@@ -11,9 +11,9 @@ const log = require("@sm-cli/log");
 const pkg = require("../package");
 const constants = require("./const");
 
-let args, config;
+let args;
 
-function core() {
+async function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
@@ -21,17 +21,19 @@ function core() {
     checkUserHome();
     checkInputArgs();
     checkEnv();
-    checkGlobalUpdate()
+    await checkGlobalUpdate();
   } catch (e) {
     log.error(e.message);
   }
 }
 
-function checkGlobalUpdate() {
+async function checkGlobalUpdate() {
   const currentVersion = pkg.version;
   const npmName = pkg.name;
-  const { getNpmInfo } = require("@sm-cli/get-npm-info");
-  getNpmInfo(npmName)
+  const { getNpmServerVersion} = require("@sm-cli/get-npm-info");
+  const versions = await getNpmServerVersion(currentVersion, npmName);
+  
+  console.log(versions);
 }
 
 function checkEnv() {
