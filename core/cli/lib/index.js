@@ -9,10 +9,11 @@ const pathExists = require("path-exists").sync;
 const commander = require("commander");
 
 const log = require("@sm-cli/log");
+const init = require("@sm-cli/init")
 const pkg = require("../package");
 const constants = require("./const");
 
-let args;
+// let args;
 const program = new commander.Command();
 
 async function core() {
@@ -37,6 +38,12 @@ function registerCommand() {
     .option("-d --debug", "是否开启调试模式", false)
     .version(pkg.version);
 
+  program
+    .command("init [projectName]")
+    .option("-f --force", "是否强制初始化项目")
+    .action(init)
+
+  // 开启 debug 模式
   program.on("option:debug", function () {
     process.env.LOG_LEVEL = "verbose";
     log.level = process.env.LOG_LEVEL;
@@ -46,11 +53,19 @@ function registerCommand() {
 
   // 对未注册命令进行 监听
   program.on("command:*", function (obj) {
-    console.log(obj);
+    const availableCommands = program.commands.map((cmd) => cmd.name());
+    console.log(colors.red("未知命令:", obj[0]));
+    console.log(colors.red("可用命令:", availableCommands.join(",")));
   });
 
+  // 用户未输入 command option
+  if (process.argv.length < 3) {
+    program.outputHelp();
+    console.log();
+  }
+
   program.parse(process.argv);
-}                   
+}
 
 async function checkGlobalUpdate() {
   const currentVersion = pkg.version;
@@ -95,22 +110,22 @@ function createDefaultConfig() {
 }
 
 // 根据入参 判断是否打印调试代码
-function checkInputArgs() {
-  const minimist = require("minimist");
-  args = minimist(process.argv.slice(2));
-  checkArgs();
-}
+// function checkInputArgs() {
+//   const minimist = require("minimist");
+//   args = minimist(process.argv.slice(2));
+//   checkArgs();
+// }
 
-function checkArgs() {
-  if (args.debug) {
-    process.env.LOG_LEVEL = "verbose";
-  } else {
-    process.env.LOG_LEVEL = "info";
-  }
-  //  上面修改没有生效  require("@sm-cli/log");
-  //  require 是同步执行的
-  log.level = process.env.LOG_LEVEL;
-}
+// function checkArgs() {
+//   if (args.debug) {
+//     process.env.LOG_LEVEL = "verbose";
+//   } else {
+//     process.env.LOG_LEVEL = "info";
+//   }
+//   //  上面修改没有生效  require("@sm-cli/log");
+//   //  require 是同步执行的
+//   log.level = process.env.LOG_LEVEL;
+// }
 
 function checkUserHome() {
   if (!userHome || !pathExists(userHome)) {
