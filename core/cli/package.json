@@ -24,9 +24,10 @@
   },
   "gitHead": "e369f55239d6cda94b463948aa9ec1d0e2c86ce8",
   "dependencies": {
-    "@sm-cli/log": "^0.0.10",
     "@sm-cli/get-npm-info": "^0.0.10",
+    "@sm-cli/log": "^0.0.10",
     "colors": "^1.4.0",
+    "commander": "^7.2.0",
     "dotenv": "^10.0.0",
     "import-local": "^3.0.2",
     "minimist": "^1.2.5",

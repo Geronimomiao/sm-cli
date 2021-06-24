@@ -6,12 +6,14 @@ const semver = require("semver");
 const colors = require("colors");
 const userHome = require("user-home");
 const pathExists = require("path-exists").sync;
+const commander = require("commander");
 
 const log = require("@sm-cli/log");
 const pkg = require("../package");
 const constants = require("./const");
 
 let args;
+const program = new commander.Command();
 
 async function core() {
   try {
@@ -19,34 +21,64 @@ async function core() {
     checkNodeVersion();
     checkRoot();
     checkUserHome();
-    checkInputArgs();
+    // checkInputArgs();
     checkEnv();
     await checkGlobalUpdate();
+    registerCommand();
   } catch (e) {
     log.error(e.message);
   }
 }
 
+function registerCommand() {
+  program
+    .name(Object.keys(pkg.bin)[0])
+    .usage("<command> [options]")
+    .option("-d --debug", "是否开启调试模式", false)
+    .version(pkg.version);
+
+  program.on("option:debug", function () {
+    process.env.LOG_LEVEL = "verbose";
+    log.level = process.env.LOG_LEVEL;
+
+    log.verbose("tt");
+  });
+
+  // 对未注册命令进行 监听
+  program.on("command:*", function (obj) {
+    console.log(obj);
+  });
+
+  program.parse(process.argv);
+}                   
+
 async function checkGlobalUpdate() {
   const currentVersion = pkg.version;
   const npmName = pkg.name;
-  const { getNpmServerVersion} = require("@sm-cli/get-npm-info");
-  const versions = await getNpmServerVersion(currentVersion, npmName);
-  
-  console.log(versions);
+  const { getNpmServerVersion } = require("@sm-cli/get-npm-info");
+  const lastVersions = await getNpmServerVersion(currentVersion, npmName);
+
+  if (lastVersions && semver.gt(lastVersions, currentVersion)) {
+    log.warn(
+      `
+      更新提示: 请手动更新 ${npmName}, 当前版本: ${currentVersion}, 最新版本${lastVersions}
+                            更新命令: npm install -g ${npmName}
+      `
+    );
+  }
 }
 
 function checkEnv() {
-  const dotenv = require("dotenv");
+  // const dotenv = require("dotenv");
   // 如果有 跟多的环境变量需要配置 可以直接配置到 ${userHome}/.env 下就可
-  const dotenvPath = path.resolve(userHome, ".env");
-  if (pathExists(dotenvPath)) {
-    // dotenv.config 将路径中拿到的环境变量 存到 process.env 中
-    config = dotenv.config({ path: dotenvPath });
-  }
+  // const dotenvPath = path.resolve(userHome, ".env");
+  // if (pathExists(dotenvPath)) {
+  // dotenv.config 将路径中拿到的环境变量 存到 process.env 中
+  // let config = dotenv.config({ path: dotenvPath });
+  // }
 
   createDefaultConfig();
-  log.verbose("cli dir", process.env.CLI_HOME_PATH);
+  // log.verbose("cli dir", process.env.CLI_HOME_PATH);
 }
 
 function createDefaultConfig() {
