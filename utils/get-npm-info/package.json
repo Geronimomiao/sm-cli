@@ -1,6 +1,6 @@
 {
   "name": "@sm-cli/get-npm-info",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "获取 npm 包版本信息",
   "author": "wangsimiao <wangsimiao.tjpu@bytedance.com>",
   "homepage": "https://github.com/Geronimomiao/sm-cli#readme",
