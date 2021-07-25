@@ -10,6 +10,7 @@ const commander = require("commander");
 
 const log = require("@sm-cli/log");
 const init = require("@sm-cli/init");
+const exec = require("@sm-cli/exec");
 const pkg = require("../package");
 const constants = require("./const");
 
@@ -18,14 +19,9 @@ const program = new commander.Command();
 
 async function core() {
   try {
-    checkPkgVersion();
-    checkNodeVersion();
-    checkRoot();
-    checkUserHome();
-    // checkInputArgs();
-    checkEnv();
-    await checkGlobalUpdate();
+    await prepare();
     registerCommand();
+    exec();
   } catch (e) {
     log.error(e.message);
   }
@@ -45,7 +41,6 @@ function registerCommand() {
     .action(init);
 
   program.on("option:targetPath", function (targetPath) {
-    console.log(targetPath, 11);
     // 用环境变量保存 操作系统级别的变量
     process.env.CLI_TARGET_PATH = targetPath;
   });
@@ -72,6 +67,15 @@ function registerCommand() {
   }
 
   program.parse(process.argv);
+}
+
+async function prepare() {
+  checkPkgVersion();
+  checkNodeVersion();
+  checkRoot();
+  checkUserHome();
+  checkEnv();
+  await checkGlobalUpdate();
 }
 
 async function checkGlobalUpdate() {
@@ -115,7 +119,6 @@ function createDefaultConfig() {
 
   process.env.CLI_HOME_PATH = cliConfig.cliHome;
 }
-
 
 function checkUserHome() {
   if (!userHome || !pathExists(userHome)) {
