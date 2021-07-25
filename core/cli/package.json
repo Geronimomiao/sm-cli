@@ -1,6 +1,6 @@
 {
   "name": "@sm-cli/core",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "sm-cli core",
   "author": "miao.tjpu",
   "homepage": "",
@@ -24,9 +24,9 @@
   },
   "gitHead": "057c1d79a6ffe396f6006f654b18bcc44bac0f6f",
   "dependencies": {
-    "@sm-cli/get-npm-info": "^0.0.12",
-    "@sm-cli/init": "^0.0.12",
-    "@sm-cli/log": "^0.0.12",
+    "@sm-cli/get-npm-info": "^0.0.13",
+    "@sm-cli/init": "^0.0.13",
+    "@sm-cli/log": "^0.0.13",
     "colors": "^1.4.0",
     "commander": "^7.2.0",
     "dotenv": "^10.0.0",
