@@ -22,7 +22,7 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "gitHead": "cd348284c83c7020519a40cd9bdbcd96d043f660",
+  "gitHead": "6865369004ad3e37e5baaffaa9bb1375e02238ec",
   "dependencies": {
     "@sm-cli/get-npm-info": "^0.0.14",
     "@sm-cli/init": "^0.0.14",
