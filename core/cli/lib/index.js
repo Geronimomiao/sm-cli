@@ -45,7 +45,7 @@ function registerCommand() {
     .action(init);
 
   program.on("option:targetPath", function (targetPath) {
-    console.log(targetPath);
+    console.log(targetPath, 11);
     // 用环境变量保存 操作系统级别的变量
     process.env.CLI_TARGET_PATH = targetPath;
   });
