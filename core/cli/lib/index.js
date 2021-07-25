@@ -9,7 +9,7 @@ const pathExists = require("path-exists").sync;
 const commander = require("commander");
 
 const log = require("@sm-cli/log");
-const init = require("@sm-cli/init")
+const init = require("@sm-cli/init");
 const pkg = require("../package");
 const constants = require("./const");
 
@@ -36,19 +36,26 @@ function registerCommand() {
     .name(Object.keys(pkg.bin)[0])
     .usage("<command> [options]")
     .option("-d --debug", "是否开启调试模式", false)
+    .option("-tp --targetPath <targetPath>", "是否指定本地调试文件路径", "")
     .version(pkg.version);
 
   program
     .command("init [projectName]")
     .option("-f --force", "是否强制初始化项目")
-    .action(init)
+    .action(init);
+
+  program.on("option:targetPath", function (targetPath) {
+    console.log(targetPath);
+    // 用环境变量保存 操作系统级别的变量
+    process.env.CLI_TARGET_PATH = targetPath;
+  });
 
   // 开启 debug 模式
   program.on("option:debug", function () {
     process.env.LOG_LEVEL = "verbose";
     log.level = process.env.LOG_LEVEL;
 
-    log.verbose("tt");
+    log.verbose("debug 模式开启");
   });
 
   // 对未注册命令进行 监听
@@ -109,23 +116,6 @@ function createDefaultConfig() {
   process.env.CLI_HOME_PATH = cliConfig.cliHome;
 }
 
-// 根据入参 判断是否打印调试代码
-// function checkInputArgs() {
-//   const minimist = require("minimist");
-//   args = minimist(process.argv.slice(2));
-//   checkArgs();
-// }
-
-// function checkArgs() {
-//   if (args.debug) {
-//     process.env.LOG_LEVEL = "verbose";
-//   } else {
-//     process.env.LOG_LEVEL = "info";
-//   }
-//   //  上面修改没有生效  require("@sm-cli/log");
-//   //  require 是同步执行的
-//   log.level = process.env.LOG_LEVEL;
-// }
 
 function checkUserHome() {
   if (!userHome || !pathExists(userHome)) {
